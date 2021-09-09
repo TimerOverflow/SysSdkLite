@@ -8,7 +8,7 @@
 #include <math.h>
 #include "SysSdkLite.h"
 /*********************************************************************************/
-#if(SYS_SDK_LITE_REVISION_DATE != 20191031)
+#if(SYS_SDK_LITE_REVISION_DATE != 20191212)
 #error wrong include file. (SysSdkLite.h)
 #endif
 /*********************************************************************************/
@@ -339,4 +339,91 @@ tU8	CheckInputEvent(tU16 Delay, tag_InputEvent *Input, tU8 Condition, tU8 PreCon
 }
 #endif
 /*********************************************************************************/
+#ifdef __SDK_LITE_TEMP_C_TO_F__
+float	CnvTempC_To_F(float Temp)
+{
+	return Temp * (float) 1.8 + 32;
+}
+#endif
+/*********************************************************************************/
+#ifdef __SDK_LITE_CALC_TIME_DATE_FUNC__
 
+tU16 DaysForMonth[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+static tU8 IsLeapYear(tU16 Year)
+{
+	if((Year % 4 == 0) && ((Year % 100 != 0) || (Year % 400 == 0))) return true;
+	else return false;
+}
+
+static tS32 CnvDateToDay(tag_SysSdkDate *Date)
+{
+	tU8 i;
+	tS32 Day = 0;
+	
+	Day = ((Date->Year - 1) * 365) + ((Date->Year - 1) / 4) - ((Date->Year - 1) / 100) + ((Date->Year - 1) / 400);
+	
+	if(IsLeapYear(Date->Year) == true)	DaysForMonth[2] = 29;
+	else DaysForMonth[2] = 28;
+	
+	for(i = 1; i < Date->Month; i++)
+	{
+		Day += DaysForMonth[i];
+	}
+	
+	Day += Date->Date;
+	
+	return Day;
+}
+
+void GetDateAfterDay(tag_SysSdkDate *Date, tU16 AddDay)
+{
+	tU16 YearSize;
+	tU16 y = Date->Year;
+	tU8 m = Date->Month;
+	tU8 d = Date->Date;
+	
+	while(1)
+	{
+		if(IsLeapYear(y) == true) YearSize = 366;
+		else YearSize = 365;
+		
+		if(AddDay < YearSize){ break; }
+		else{ AddDay -= YearSize; y++; }
+	}
+	//연
+	
+	while(1)
+	{
+		if(IsLeapYear(y) == true) DaysForMonth[2] = 29;
+		else DaysForMonth[2] = 28;
+		
+		if(AddDay <= DaysForMonth[m]) break;
+		AddDay -= DaysForMonth[m];
+		if(++m >= 13){ m = 1; y++; }
+	}
+	//월
+	
+	if((d + AddDay) > DaysForMonth[m])
+	{
+		d = d + AddDay - DaysForMonth[m];
+		m++;
+	}
+	else
+	{
+		d += AddDay;
+	}
+	//일
+	
+	Date->Year = y;
+	Date->Month = m;
+	Date->Date = d;
+}
+
+tS32 GetDiffDaysEarlierToAfterDate(tag_SysSdkDate *Earlier, tag_SysSdkDate *After)
+{
+	return CnvDateToDay(After) - CnvDateToDay(Earlier);
+}
+
+#endif
+/*********************************************************************************/
