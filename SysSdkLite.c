@@ -8,12 +8,12 @@
 #include <math.h>
 #include "SysSdkLite.h"
 /*********************************************************************************/
-#if(SYS_SDK_LITE_REVISION_DATE != 20191017)
+#if(SYS_SDK_LITE_REVISION_DATE != 20191031)
 #error wrong include file. (SysSdkLite.h)
 #endif
 /*********************************************************************************/
 #ifdef __SDK_LITE_AD_TEMP_CALC_10__
-float AdTempCalc_10(float x)
+double AdTempCalc_10(double x)
 {
 	/*
 		type : temperature
@@ -25,22 +25,22 @@ float AdTempCalc_10(float x)
 		T3 : 30
 	*/
 
-	float result, temp;
+	double result, temp;
 
 	temp = (x * 10) / (1024 - x);
 	temp = log(temp);
 
-	result	= 0.0026764;
+	result	= (double) 0.0026764;
 	//c1a
 
-	result += 0.00029149 * temp;
+	result += ((double) 0.00029149) * temp;
 	//c2a
 
-	result += 0.0000005387 * temp * temp * temp;
+	result += ((double) 0.0000005387) * temp * temp * temp;
 	//c3a
 
 	result = 1/result;
-	result -= 273.15;
+	result -= (double) 273.15;
 	result *= 10;
 
 	return result;
@@ -48,7 +48,7 @@ float AdTempCalc_10(float x)
 #endif
 /*********************************************************************************/
 #ifdef __SDK_LITE_AD_TEMP_CALC_27__
-float AdTempCalc_27(float x)
+double AdTempCalc_27(double x)
 {
 	/*
 		type : temperature
@@ -60,22 +60,22 @@ float AdTempCalc_27(float x)
 		T3 : 25
 	*/
 
-	float result, temp;
+	double result, temp;
 
 	temp = (x * 27) / (1024 - x);
 	temp = log(temp);
 
-	result	= 0.002675838;
+	result	= (double) 0.002675838;
 	//c1a
 
-	result += 0.000291685 * temp;
+	result += ((double) 0.000291685) * temp;
 	//c2a
 
-	result += 0.0000005364 * temp * temp * temp;
+	result += ((double) 0.0000005364) * temp * temp * temp;
 	//c3a
 
 	result = 1/result;
-	result -= 273.15;
+	result -= (double) 273.15;
 	result *= 10;
 
 	return result;
@@ -83,7 +83,7 @@ float AdTempCalc_27(float x)
 #endif
 /*********************************************************************************/
 #ifdef __SDK_LITE_AD_TEMP_CALC_4_7__
-float AdTempCalc_4_7(float x)
+double AdTempCalc_4_7(double x)
 {
 	/*
 		type : temperature
@@ -100,22 +100,22 @@ float AdTempCalc_4_7(float x)
 		에러검출은 -45도 이하, 165이상일 경우.
 	*/
 
-	float result, temp;
+	double result, temp;
 
 	temp = (x * 4.7) / (1024 - x);
 	temp = log(temp);
 
-	result	= 0.002687626;
+	result	= (double) 0.002687626;
 	//c1a
 
-	result += 0.000283519 * temp;
+	result += ((double) 0.000283519) * temp;
 	//c2a
 
-	result += 0.0000009757 * temp * temp * temp;
+	result += ((double) 0.0000009757) * temp * temp * temp;
 	//c3a
 
 	result = 1/result;
-	result -= 273.15;
+	result -= ((double) 273.15);
 	result *= 10;
 
 	return result;
