@@ -8,7 +8,7 @@
 #include <math.h>
 #include "SysSdkLite.h"
 /*********************************************************************************/
-#if(SYS_SDK_LITE_REVISION_DATE != 20200522)
+#if(SYS_SDK_LITE_REVISION_DATE != 20200610)
 #error wrong include file. (SysSdkLite.h)
 #endif
 /*********************************************************************************/
@@ -220,7 +220,7 @@ tU8 CalcCtrlStep(tS16 Data, tS16 Set, tS16 SetPlusDev, tU8 CurStep)
 #endif
 /*********************************************************************************/
 #ifdef __SDK_LITE_CALC_PERCENTAGE__
-float CalcPercentage(tS16 Data, tS16 Min, tS16 Max, tS16 Resolution)
+float CalcPercentage(tS16 Data, tS16 Min, tS16 Max, tU16 Resolution)
 {
 	float Result;
 	tS16 Range, Big, Small;
