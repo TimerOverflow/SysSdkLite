@@ -8,7 +8,7 @@
 #include <math.h>
 #include "SysSdkLite.h"
 /*********************************************************************************/
-#if(SYS_SDK_LITE_REVISION_DATE != 20200922)
+#if(SYS_SDK_LITE_REVISION_DATE != 20210104)
 #error wrong include file. (SysSdkLite.h)
 #endif
 /*********************************************************************************/
@@ -496,7 +496,7 @@ void GetDateAfterDay(tag_SysSdkDate *Date, tU16 AddDay)
 	if((d + AddDay) > DaysForMonth[m])
 	{
 		d = d + AddDay - DaysForMonth[m];
-		m++;
+		if(++m >= 13){ m = 1; y++; }
 	}
 	else
 	{
