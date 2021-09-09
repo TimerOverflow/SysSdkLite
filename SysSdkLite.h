@@ -11,10 +11,13 @@
 #include "SysTypedef.h"
 #include "SysSdkLiteConfig.h"
 /*********************************************************************************/
-#define SYS_SDK_LITE_REVISION_DATE		20200922
+#define SYS_SDK_LITE_REVISION_DATE		20210104
 /*********************************************************************************/
 /** REVISION HISTORY **/
 /*
+	2021. 01. 04.					- GetDateAfterDay() 12월에서 해를 넘긴 날짜를 구할 경우 13월로 계산할 수 있는 문제 수정.
+	Jeong Hyun Gu
+
 	2020. 09. 22.					- RecordInput() Adc인자는 AdcMax보다 클 수 없도록 제한.
 	Jeong Hyun Gu
 
