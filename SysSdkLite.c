@@ -8,8 +8,43 @@
 #include <math.h>
 #include "SysSdkLite.h"
 /*********************************************************************************/
-#if(SYS_SDK_LITE_REVISION_DATE != 20210104)
+#if(SYS_SDK_LITE_REVISION_DATE != 20210324)
 #error wrong include file. (SysSdkLite.h)
+#endif
+/*********************************************************************************/
+#ifdef __SDK_LITE_AD_TEMP_CALC_6_8__
+double AdTempCalc_6_8(double x)
+{
+	/*
+		type : temperature
+		Rref : 6.8K ohm
+		resolution : 10bit
+
+		T1 : -20
+		T2 : 10
+		T3 : 80
+	*/
+
+	double result, temp;
+
+	temp = (x * 6.8) / (1024 - x);
+	temp = log(temp);
+
+	result	= (double) 0.002684079; 
+	//c1a
+
+	result += ((double) 0.000287947) * temp;
+	//c2a
+
+	result += ((double) 0.0000006376 ) * temp * temp * temp;
+	//c3a
+
+	result = 1/result;
+	result -= (double) 273.15;
+	result *= 10;
+
+	return result;
+}
 #endif
 /*********************************************************************************/
 #ifdef __SDK_LITE_AD_TEMP_CALC_10__
