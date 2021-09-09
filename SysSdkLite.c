@@ -8,7 +8,7 @@
 #include <math.h>
 #include "SysSdkLite.h"
 /*********************************************************************************/
-#if(SYS_SDK_LITE_REVISION_DATE != 20191212)
+#if(SYS_SDK_LITE_REVISION_DATE != 20200311)
 #error wrong include file. (SysSdkLite.h)
 #endif
 /*********************************************************************************/
@@ -208,7 +208,7 @@ float CalcPercentage(tS16 Data, tS16 Min, tS16 Max, tS16 Resolution)
 #endif
 /*********************************************************************************/
 #ifdef __SDK_LITE_RECORD_INTPUT__
-float RecordInput(tU16 Adc, tS16 Min, tS16 Max, tU16 AdcMin, tU16 AdcMax)
+float RecordInput(tU16 Adc, tS32 Min, tS32 Max, tU16 AdcMin, tU16 AdcMax)
 {
 	tU16 ADCRANGE	= (AdcMax - AdcMin);
 	float Result;
@@ -347,7 +347,6 @@ float	CnvTempC_To_F(float Temp)
 #endif
 /*********************************************************************************/
 #ifdef __SDK_LITE_CALC_TIME_DATE_FUNC__
-
 tU16 DaysForMonth[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 static tU8 IsLeapYear(tU16 Year)
@@ -424,6 +423,37 @@ tS32 GetDiffDaysEarlierToAfterDate(tag_SysSdkDate *Earlier, tag_SysSdkDate *Afte
 {
 	return CnvDateToDay(After) - CnvDateToDay(Earlier);
 }
-
+#endif
+/*********************************************************************************/
+#ifdef __SDK_LITE_CHECK_SCHDULE_TIME_STOP__
+tU8 CheckScheduleTimeStop(tag_CheckScheduleTime *Sch, tU8 Run, tU8 CurHour, tU8 CurMin)
+{
+	tU16 CurTime, StartTime, EndTime;
+	
+	CurTime = (CurHour * 60) + CurMin;
+	StartTime = ((Sch->Start >> 8) * 60) + (Sch->Start & 0x00FF);
+	EndTime = ((Sch->End >> 8) * 60) + (Sch->End & 0x00FF);
+	
+	if(Run == false)
+	{
+		return true;
+	}
+	else if(StartTime < EndTime)
+	{
+		if((StartTime > CurTime) || (CurTime >= EndTime))
+		{
+			return true;
+		}
+	}
+	else if(StartTime > EndTime)
+	{
+		if((EndTime <= CurTime) && (CurTime < StartTime))
+		{
+			return true;
+		}
+	}
+	
+	return false;
+}
 #endif
 /*********************************************************************************/

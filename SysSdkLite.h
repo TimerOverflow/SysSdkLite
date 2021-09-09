@@ -10,10 +10,13 @@
 #include "SysTypedef.h"
 #include "SysSdkLiteConfig.h"
 /*********************************************************************************/
-#define SYS_SDK_LITE_REVISION_DATE		20191212
+#define SYS_SDK_LITE_REVISION_DATE		20200311
 /*********************************************************************************/
 /** REVISION HISTORY **/
 /*
+	2020. 03. 11.					- CheckScheduleTimeStop() 함수 추가. 시스트로닉스 표준 스케줄 함수.
+	Jeong Hyun Gu					- RecordInput() 함수의 Min, Max 인수 타입 tS32로 변경.
+
 	2019. 12. 12.					- GetDateAfterDay() 함수 추가. 특정날짜에서 n일 더한 후 날짜 계산.
 	Jeong Hyun Gu					- GetDiffDaysEarlierToAfterDate() 함수 추가. 특정 날짜 사이의 일수 계산.
 
@@ -117,7 +120,7 @@ float CalcPercentage(tS16 Data, tS16 Min, tS16 Max, tS16 Resolution);
 	if(CurHumi < HumiRecMin) HumiSenError = true;
 */
 #ifdef __SDK_LITE_RECORD_INTPUT__
-float RecordInput(tU16 Adc, tS16 Min, tS16 Max, tU16 AdcMin, tU16 AdcMax);
+float RecordInput(tU16 Adc, tS32 Min, tS32 Max, tU16 AdcMin, tU16 AdcMax);
 #endif
 /*********************************************************************************/
 /*
@@ -226,7 +229,7 @@ void CompEachControl(tag_CompEachControl *Comp, tU8 Run);
 	주로 DI포트의 입력을 감지시간과 조건에 따라 상태를 결정하여 리턴한다.
 	
 	@example
-	운정 중이고, 히터가 ON중일 때 감지하는 자동 복귀 히터 경보 DI포트.
+	운전 중이고, 히터가 ON중일 때 감지하는 자동 복귀 히터 경보 DI포트.
 	
 	if(TF.Bit.msec100)
 	{
@@ -287,6 +290,40 @@ typedef struct
 }tag_SysSdkDate;
 void GetDateAfterDay(tag_SysSdkDate *Date, tU16 AddDay);
 tS32 GetDiffDaysEarlierToAfterDate(tag_SysSdkDate *Earlier, tag_SysSdkDate *After);
+#endif
+/*********************************************************************************/
+#ifdef __SDK_LITE_CHECK_SCHDULE_TIME_STOP__
+/*
+	@brief
+	스케줄정지 여부 확인 함수
+	현재시간과 설정시간을 비교하여 현재 시간이 운전 또는 정지조건인지 확인한다.
+	
+	@example
+	스케줄 기능 사용여부를 사용할 수 있고, 시작시간과 종료시간 조건을 확인하여
+	스케줄 정지 조건인지 확인한다.
+	Sys.SchUse : 스케줄 기능 사용여부.
+	Sys.SchTime[] : 요일별 시작시간, 종료시간.
+	Sys.SchEachDayUse : 요일별 운전/정지 설정 (비트단위)
+	
+	if(TF.Bit.sec)
+	{
+		Idx = Sys.DateDay >= 1 ? Sys.DateDay - 1 : 0;
+		if(Sys.SchUse && CheckScheduleTimeStop(&Sys.SchTime[Idx], Sys.SchEachDayUse & (1 << Idx), Sys.TimeHour, Sys.TimeMin))
+		{
+			Sys.SF.Bit.ScheduleStop = true;
+		}
+		else
+		{
+			Sys.SF.Bit.ScheduleStop = false;
+		}
+	}
+*/
+typedef struct
+{
+	tU16 Start;
+	tU16 End;
+}tag_CheckScheduleTime;
+tU8 CheckScheduleTimeStop(tag_CheckScheduleTime *Sch, tU8 Run, tU8 CurHour, tU8 CurMin);
 #endif
 /*********************************************************************************/
 #endif //__SYS_SDK_LITE_H__
