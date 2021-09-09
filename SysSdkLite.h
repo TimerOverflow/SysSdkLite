@@ -7,13 +7,17 @@
 #ifndef __SYS_SDK_LITE_H__
 #define	__SYS_SDK_LITE_H__
 /*********************************************************************************/
+#include <stdlib.h>
 #include "SysTypedef.h"
 #include "SysSdkLiteConfig.h"
 /*********************************************************************************/
-#define SYS_SDK_LITE_REVISION_DATE		20200311
+#define SYS_SDK_LITE_REVISION_DATE		20200520
 /*********************************************************************************/
 /** REVISION HISTORY **/
 /*
+	2020. 05. 20.					- abs() 함수 삭제. 대신 stdlib.h included.
+	Jeong Hyun Gu					- AdTempCalc_20k_TypeA() 함수 추가.
+
 	2020. 03. 11.					- CheckScheduleTimeStop() 함수 추가. 시스트로닉스 표준 스케줄 함수.
 	Jeong Hyun Gu					- RecordInput() 함수의 Min, Max 인수 타입 tS32로 변경.
 
@@ -40,7 +44,7 @@
 /*********************************************************************************/
 /**Macro Function**/
 
-#define abs(a)								((a) >= 0  ? (a) : -(a))
+#define Sysabs(a)								((a) >= 0  ? (a) : -(a))
 #define GetArrayQty(Arry)			(sizeof(Arry) / sizeof(Arry[0]))
 
 /*********************************************************************************/
@@ -75,6 +79,17 @@ double AdTempCalc_27(double x);
 */
 #ifdef __SDK_LITE_AD_TEMP_CALC_4_7__
 double AdTempCalc_4_7(double x);
+#endif
+/*********************************************************************************/
+/*
+	@brief
+	기준저항 20kohm, 11bit ADC, steinhart NTC 계산 함수.
+	
+	@example
+	CurTemp = AdTempCalc_20k_TypeA(Adc);
+*/
+#ifdef __SDK_LITE_AD_TEMP_CALC_20K_TYPEA__
+double AdTempCalc_20k_TypeA(double x);
 #endif
 /*********************************************************************************/
 /*
