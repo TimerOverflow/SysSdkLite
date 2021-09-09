@@ -9,14 +9,14 @@
 /*********************************************************************************/
 /**Define**/
 
-typedef unsigned char						tU8;
-typedef signed char							tS8;
+typedef unsigned char             tU8;
+typedef signed char               tS8;
 
-typedef unsigned int					tU16;
-typedef signed int						tS16;
+typedef unsigned int              tU16;
+typedef signed int                tS16;
 
-typedef unsigned long						tU32;
-typedef signed long							tS32;
+typedef unsigned long             tU32;
+typedef signed long               tS32;
 
 /*********************************************************************************/
 /**Enum**/
