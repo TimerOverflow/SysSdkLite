@@ -11,10 +11,13 @@
 #include "SysTypedef.h"
 #include "SysSdkLiteConfig.h"
 /*********************************************************************************/
-#define SYS_SDK_LITE_REVISION_DATE		20200610
+#define SYS_SDK_LITE_REVISION_DATE		20200703
 /*********************************************************************************/
 /** REVISION HISTORY **/
 /*
+	2020. 07. 03.					- SetRunningTime() 함수 추가.
+	Jeong Hyun Gu
+
 	2020. 06. 10.					- CalcPercentage() 함수의 Resolution 인자 tS16 -> tU16으로 변경.
 	Jeong Hyun Gu
 
@@ -344,6 +347,26 @@ typedef struct
 	tU16 End;
 }tag_CheckScheduleTime;
 tU8 CheckScheduleTimeStop(tag_CheckScheduleTime *Sch, tU8 Run, tU8 CurHour, tU8 CurMin);
+#endif
+/*********************************************************************************/
+#ifdef __SDK_LITE_SET_RUNNING_TIME__
+/*
+	@brief
+	적산시간 계산 함수. 초단위로 카운트하며 1시간 단위로 비휘발성 메모리에 저장할 수 있도록 신호 리턴.
+	
+	@example
+	if(TF.Bit.sec)
+	{
+		if(SetRunningTime(Sys.Do1.Bit.Comp1,	&Sys.Actiontime[0],	&RunTimeManage[0])) SetEepWriteEnable(&EepSys);
+		if(SetRunningTime(Sys.Do1.Bit.Comp2,	&Sys.Actiontime[1],	&RunTimeManage[1])) SetEepWriteEnable(&EepSys);
+	}
+*/
+typedef struct
+{
+	tU8 SecCnt, MinCnt;
+	tU16 Temp;
+}tag_RuntimeVal;
+tU8 SetRunningTime(tU8 Condition, tU16	*RunTime,	tag_RuntimeVal *Data);
 #endif
 /*********************************************************************************/
 #endif //__SYS_SDK_LITE_H__

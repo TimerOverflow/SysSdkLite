@@ -8,7 +8,7 @@
 #include <math.h>
 #include "SysSdkLite.h"
 /*********************************************************************************/
-#if(SYS_SDK_LITE_REVISION_DATE != 20200610)
+#if(SYS_SDK_LITE_REVISION_DATE != 20200703)
 #error wrong include file. (SysSdkLite.h)
 #endif
 /*********************************************************************************/
@@ -495,6 +495,38 @@ tU8 CheckScheduleTimeStop(tag_CheckScheduleTime *Sch, tU8 Run, tU8 CurHour, tU8 
 		if((EndTime <= CurTime) && (CurTime < StartTime))
 		{
 			return true;
+		}
+	}
+	
+	return false;
+}
+#endif
+/*********************************************************************************/
+#ifdef __SDK_LITE_SET_RUNNING_TIME__
+tU8 SetRunningTime(tU8 Condition, tU16	*RunTime,	tag_RuntimeVal *Data)
+{
+	const	tU16 Maximum = 65000;
+	
+	if(Condition == true)
+	{
+		if(++Data->SecCnt >= 60)
+		{
+			Data->SecCnt = 0;
+			if(++Data->MinCnt >= 60)
+			{
+				Data->MinCnt = 0;
+				if(*RunTime < Maximum) (*RunTime)++;
+				return true;
+			}
+		}
+	}
+
+	if(Data->Temp != *RunTime)
+	{
+		Data->Temp = *RunTime;
+		if(Data->Temp == 0)
+		{
+			Data->SecCnt = Data->MinCnt = 0;
 		}
 	}
 	
