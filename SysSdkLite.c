@@ -8,7 +8,7 @@
 #include <math.h>
 #include "SysSdkLite.h"
 /*********************************************************************************/
-#if(SYS_SDK_LITE_REVISION_DATE != 20200703)
+#if(SYS_SDK_LITE_REVISION_DATE != 20200720)
 #error wrong include file. (SysSdkLite.h)
 #endif
 /*********************************************************************************/
@@ -157,6 +157,50 @@ double AdTempCalc_20k_TypeA(double x)
 	//c2a
 
 	result += ((double) 0.0000006826) * temp * temp * temp;
+	//c3a
+	
+	result = 1/result;
+	result -= ((double) 273.15);
+	result *= 10;
+
+	return result;
+}
+#endif
+/*********************************************************************************/
+#ifdef __SDK_LITE_AD_TEMP_CALC_20K_TYPEB__
+double AdTempCalc_20k_TypeB(double x)
+{
+	/*
+		type : temperature
+		Ntc source: 3.3V
+		Vref : 2.7V
+		Rref : 20K ohm
+		resolution : 11bit
+		Sensor: Thermokon
+
+		T1 : 0
+		T2 : 20
+		T3 : 60
+		
+		권장 사용 범위는 -10~80도.
+		에러검출은 -15도 이하, 85도 이상일 경우.
+	*/
+
+	double result, temp;
+
+	x = x / 3.3 * 2.7;
+	//VSOURCE, VREF가 다른 부분을 처리한다.
+	
+	temp = (x * 20) / (2047 - x);
+	temp = log(temp);
+
+	result	= (double) 0.002772599;
+	//c1a
+
+	result += ((double) 0.000250797) * temp;
+	//c2a
+
+	result += ((double) 0.0000003341) * temp * temp * temp;
 	//c3a
 	
 	result = 1/result;

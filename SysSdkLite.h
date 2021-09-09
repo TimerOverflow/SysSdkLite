@@ -11,10 +11,17 @@
 #include "SysTypedef.h"
 #include "SysSdkLiteConfig.h"
 /*********************************************************************************/
-#define SYS_SDK_LITE_REVISION_DATE		20200703
+#define SYS_SDK_LITE_REVISION_DATE		20200720
 /*********************************************************************************/
 /** REVISION HISTORY **/
 /*
+	2020. 07. 20.					- AdTempCalc_20k_TypeB() 함수 추가. 슈타인하트 공식은 기준저항과 상관없이
+	Jeong Hyun Gu						결정된다. 오롯이 센서 저항값에 의해 결정되므로 센서 사양만 변경되지 않으면
+													기준저항이나 ADC 해상도와 상관없이 적용 가능하다. 지금까지 기준저항에 따라
+													세분화한 함수들 그렇게 할 필요가 없었다. 정확도를 요하는 구간을 선택하는 옵션이
+													있는데 그에 따라 공식이 약간 변경될 수는 있다. F/W 개바 및 유지보수 전략적인 면에서 보았을 때 
+													통합이 필요해 보인다.
+
 	2020. 07. 03.					- SetRunningTime() 함수 추가.
 	Jeong Hyun Gu
 
@@ -98,6 +105,17 @@ double AdTempCalc_4_7(double x);
 */
 #ifdef __SDK_LITE_AD_TEMP_CALC_20K_TYPEA__
 double AdTempCalc_20k_TypeA(double x);
+#endif
+/*********************************************************************************/
+/*
+	@brief
+	기준저항 20kohm, 11bit ADC, steinhart NTC 계산 함수.
+	
+	@example
+	CurTemp = AdTempCalc_20k_TypeA(Adc);
+*/
+#ifdef __SDK_LITE_AD_TEMP_CALC_20K_TYPEB__
+double AdTempCalc_20k_TypeB(double x);
 #endif
 /*********************************************************************************/
 /*
