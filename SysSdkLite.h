@@ -10,10 +10,14 @@
 #include "SysTypedef.h"
 #include "SysSdkLiteConfig.h"
 /*********************************************************************************/
-#define SYS_SDK_LITE_REVISION_DATE		20191017
+#define SYS_SDK_LITE_REVISION_DATE		20191031
 /*********************************************************************************/
 /** REVISION HISTORY **/
 /*
+	2019. 10. 31.					- Setbit(), Clrbit(), Chkbit() 매크로 함수 삭제.
+	Jeong Hyun Gu					- STM32등 32bit CPU와 호환 위해 AdTempCalc_10(), AdTempCalc_27(), AdTempCalc_4_7()의 
+													타입 float -> double로 변경. 
+
 	2019. 10. 17.					- 초기버전.
 	Jeong Hyun Gu
 */
@@ -30,21 +34,17 @@
 #define abs(a)								((a) >= 0  ? (a) : -(a))
 #define GetArrayQty(Arry)			(sizeof(Arry) / sizeof(Arry[0]))
 
-#define Setbit(address, bit) (address |=  (1 << bit))
-#define Clrbit(address, bit) (address &=  ((1 << bit) ^ 0xFF))
-#define Chkbit(address, bit) (address &   (1 << bit))
-
 /*********************************************************************************/
 #ifdef __SDK_LITE_AD_TEMP_CALC_10__
-float AdTempCalc_10(float x);
+double AdTempCalc_10(double x);
 #endif
 /*********************************************************************************/
 #ifdef __SDK_LITE_AD_TEMP_CALC_27__
-float AdTempCalc_27(float x);
+double AdTempCalc_27(double x);
 #endif
 /*********************************************************************************/
 #ifdef __SDK_LITE_AD_TEMP_CALC_4_7__
-float AdTempCalc_4_7(float x);
+double AdTempCalc_4_7(double x);
 #endif
 /*********************************************************************************/
 #ifdef	__SDK_LITE_CALC_CTRL_STEP__
