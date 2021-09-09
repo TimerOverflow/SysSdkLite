@@ -8,7 +8,7 @@
 #include <math.h>
 #include "SysSdkLite.h"
 /*********************************************************************************/
-#if(SYS_SDK_LITE_REVISION_DATE != 20200720)
+#if(SYS_SDK_LITE_REVISION_DATE != 20200922)
 #error wrong include file. (SysSdkLite.h)
 #endif
 /*********************************************************************************/
@@ -312,6 +312,7 @@ float RecordInput(tU16 Adc, tS32 Min, tS32 Max, tU16 AdcMin, tU16 AdcMax)
 	}
 	else
 	{
+		if(Adc > AdcMax) Adc = AdcMax;
 		Result = Max - Min;
 		Adc -= AdcMin;
 		Result = (float) Adc * (Result / ADCRANGE) + Min;
