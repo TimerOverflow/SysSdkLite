@@ -8,7 +8,7 @@
 #include <math.h>
 #include "SysSdkLite.h"
 /*********************************************************************************/
-#if(SYS_SDK_LITE_REVISION_DATE != 20200520)
+#if(SYS_SDK_LITE_REVISION_DATE != 20200522)
 #error wrong include file. (SysSdkLite.h)
 #endif
 /*********************************************************************************/
@@ -246,7 +246,7 @@ float CalcPercentage(tS16 Data, tS16 Min, tS16 Max, tS16 Resolution)
 
 	Range = abs(Max - Min);
 	Result = Data - Min;
-	Result = abs((Result * Resolution) / Range);
+	Result = fabs((Result * Resolution) / Range);
 
 	return Result;
 }

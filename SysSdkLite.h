@@ -11,10 +11,13 @@
 #include "SysTypedef.h"
 #include "SysSdkLiteConfig.h"
 /*********************************************************************************/
-#define SYS_SDK_LITE_REVISION_DATE		20200520
+#define SYS_SDK_LITE_REVISION_DATE		20200522
 /*********************************************************************************/
 /** REVISION HISTORY **/
 /*
+	2020. 05. 22.					- CalcPercentage() 함수에서 실수형 절대값 얻는 부분 abs() -> fabs()로 변경.
+	Jeong Hyun Gu
+
 	2020. 05. 20.					- abs() 함수 삭제. 대신 stdlib.h included.
 	Jeong Hyun Gu					- AdTempCalc_20k_TypeA() 함수 추가.
 
