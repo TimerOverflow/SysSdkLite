@@ -11,10 +11,13 @@
 #include "SysTypedef.h"
 #include "SysSdkLiteConfig.h"
 /*********************************************************************************/
-#define SYS_SDK_LITE_REVISION_DATE		20200720
+#define SYS_SDK_LITE_REVISION_DATE		20200922
 /*********************************************************************************/
 /** REVISION HISTORY **/
 /*
+	2020. 09. 22.					- RecordInput() Adc인자는 AdcMax보다 클 수 없도록 제한.
+	Jeong Hyun Gu
+
 	2020. 07. 20.					- AdTempCalc_20k_TypeB() 함수 추가. 슈타인하트 공식은 기준저항과 상관없이
 	Jeong Hyun Gu						결정된다. 오롯이 센서 저항값에 의해 결정되므로 센서 사양만 변경되지 않으면
 													기준저항이나 ADC 해상도와 상관없이 적용 가능하다. 지금까지 기준저항에 따라
