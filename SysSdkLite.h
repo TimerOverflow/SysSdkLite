@@ -11,10 +11,13 @@
 #include "SysTypedef.h"
 #include "SysSdkLiteConfig.h"
 /*********************************************************************************/
-#define SYS_SDK_LITE_REVISION_DATE		20200522
+#define SYS_SDK_LITE_REVISION_DATE		20200610
 /*********************************************************************************/
 /** REVISION HISTORY **/
 /*
+	2020. 06. 10.					- CalcPercentage() 함수의 Resolution 인자 tS16 -> tU16으로 변경.
+	Jeong Hyun Gu
+
 	2020. 05. 22.					- CalcPercentage() 함수에서 실수형 절대값 얻는 부분 abs() -> fabs()로 변경.
 	Jeong Hyun Gu
 
@@ -47,7 +50,6 @@
 /*********************************************************************************/
 /**Macro Function**/
 
-#define Sysabs(a)								((a) >= 0  ? (a) : -(a))
 #define GetArrayQty(Arry)			(sizeof(Arry) / sizeof(Arry[0]))
 
 /*********************************************************************************/
@@ -116,7 +118,7 @@ tU8 CalcCtrlStep(tS16 Data, tS16 Set, tS16 SetPlusDev, tU8 CurStep);
 	CoolingAo = CalcPercentage(CurTemp, SetTemp, SetTemp + CoolDev, 100);
 */
 #ifdef	__SDK_LITE_CALC_PERCENTAGE__
-float CalcPercentage(tS16 Data, tS16 Min, tS16 Max, tS16 Resolution);
+float CalcPercentage(tS16 Data, tS16 Min, tS16 Max, tU16 Resolution);
 #endif
 /*********************************************************************************/
 /*
