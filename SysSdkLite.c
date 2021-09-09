@@ -8,7 +8,7 @@
 #include <math.h>
 #include "SysSdkLite.h"
 /*********************************************************************************/
-#if(SYS_SDK_LITE_REVISION_DATE != 20191031)
+#if(SYS_SDK_LITE_REVISION_DATE != 20191126)
 #error wrong include file. (SysSdkLite.h)
 #endif
 /*********************************************************************************/
@@ -339,4 +339,10 @@ tU8	CheckInputEvent(tU16 Delay, tag_InputEvent *Input, tU8 Condition, tU8 PreCon
 }
 #endif
 /*********************************************************************************/
-
+#ifdef __SDK_LITE_TEMP_C_TO_F__
+float	CnvTempC_To_F(float Temp)
+{
+	return Temp * (float) 1.8 + 32;
+}
+#endif
+/*********************************************************************************/
