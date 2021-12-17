@@ -154,7 +154,7 @@ double AdTempCalc_20k_TypeB(double x);
   CoolingStep = CalcCtrlStep(CurTemp, TempSet, TempSet + CoolDev, CoolingStep);
 */
 #ifdef  __SDK_LITE_CALC_CTRL_STEP__
-tU8 CalcCtrlStep(tS16 Data, tS16 Set, tS16 SetPlusDev, tU8 CurStep);
+tU8 CalcCtrlStep(tS32 Data, tS32 Set, tS32 SetPlusDev, tU8 CurStep);
 #endif
 /*********************************************************************************/
 /*
@@ -166,7 +166,7 @@ tU8 CalcCtrlStep(tS16 Data, tS16 Set, tS16 SetPlusDev, tU8 CurStep);
   CoolingAo = CalcPercentage(CurTemp, SetTemp, SetTemp + CoolDev, 100);
 */
 #ifdef  __SDK_LITE_CALC_PERCENTAGE__
-float CalcPercentage(tS16 Data, tS16 Min, tS16 Max, tU16 Resolution);
+float CalcPercentage(tS32 Data, tS32 Min, tS32 Max, tU16 Resolution);
 #endif
 /*********************************************************************************/
 /*
