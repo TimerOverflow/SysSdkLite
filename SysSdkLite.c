@@ -8,7 +8,7 @@
 #include <math.h>
 #include "SysSdkLite.h"
 /*********************************************************************************/
-#if(SYS_SDK_LITE_REVISION_DATE != 20210902)
+#if(SYS_SDK_LITE_REVISION_DATE != 20211217)
 #error wrong include file. (SysSdkLite.h)
 #endif
 /*********************************************************************************/

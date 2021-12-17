@@ -11,7 +11,7 @@
 #include "SysTypedef.h"
 #include "SysSdkLiteConfig.h"
 /*********************************************************************************/
-#define SYS_SDK_LITE_REVISION_DATE    20210902
+#define SYS_SDK_LITE_REVISION_DATE    20211217
 /*********************************************************************************/
 /** REVISION HISTORY **/
 /*
