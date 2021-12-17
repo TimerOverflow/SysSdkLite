@@ -247,9 +247,9 @@ double AdTempCalc_20k_TypeB(double x)
 #endif  //__SDK_LITE_AD_TEMP_CALC_20K_TYPEB__
 /*********************************************************************************/
 #ifdef __SDK_LITE_CALC_CTRL_STEP__
-tU8 CalcCtrlStep(tS16 Data, tS16 Set, tS16 SetPlusDev, tU8 CurStep)
+tU8 CalcCtrlStep(tS32 Data, tS32 Set, tS32 SetPlusDev, tU8 CurStep)
 {
-  tS16 Sub, Dev;
+  tS32 Sub, Dev;
   tU8 GetStep;
 
   /*
@@ -299,10 +299,10 @@ tU8 CalcCtrlStep(tS16 Data, tS16 Set, tS16 SetPlusDev, tU8 CurStep)
 #endif  //__SDK_LITE_CALC_CTRL_STEP__
 /*********************************************************************************/
 #ifdef __SDK_LITE_CALC_PERCENTAGE__
-float CalcPercentage(tS16 Data, tS16 Min, tS16 Max, tU16 Resolution)
+float CalcPercentage(tS32 Data, tS32 Min, tS32 Max, tU16 Resolution)
 {
   float Result;
-  tS16 Range, Big, Small;
+  tS32 Range, Big, Small;
 
   /*
     Data: Current Data;
