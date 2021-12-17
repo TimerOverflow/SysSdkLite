@@ -16,7 +16,7 @@
 /** REVISION HISTORY **/
 /*
   2021. 12. 17.          - __BV(), CalcCheckSum_8Bit() 함수 추가.
-  Jeong Hyun Gu
+  Jeong Hyun Gu          - CalcCtrlStep(), CalcPercentage() 변수타입 변경.
 
   2021. 09. 02.          - Bcd2Binary(), Binary2Bcd() 함수 추가.
   Jeong Hyun Gu
