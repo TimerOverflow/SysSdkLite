@@ -15,6 +15,9 @@
 /*********************************************************************************/
 /** REVISION HISTORY **/
 /*
+  2021. 12. 17.          - __BV(), CalcCheckSum_8Bit() 함수 추가.
+  Jeong Hyun Gu
+
   2021. 09. 02.          - Bcd2Binary(), Binary2Bcd() 함수 추가.
   Jeong Hyun Gu
 
@@ -73,6 +76,7 @@
 /**Macro Function**/
 
 #define GetArrayQty(Arry)      (sizeof(Arry) / sizeof(Arry[0]))
+#define __BV(bit) (1 << (bit))
 
 /*********************************************************************************/
 /*
@@ -416,10 +420,19 @@ tU8 SetRunningTime(tU8 Condition, tU16  *RunTime,  tag_RuntimeVal *Data);
   BCD, Binary 변환 함수.
 
   @example
-
 */
 tU8 Bcd2Binary(tU8 Bcd);
 tU8 Binary2Bcd(tU8 Bin);
+#endif
+/*********************************************************************************/
+#ifdef __SDK_CALC_CHECKSUM_8BIT__
+/*
+  @brief
+  8bit checksum 계산 함수.
+
+  @example
+*/
+tU8 CalcCheckSum_8Bit(tU8 *buf, tU8 len);
 #endif
 /*********************************************************************************/
 #endif //__SYS_SDK_LITE_H__

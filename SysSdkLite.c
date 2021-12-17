@@ -45,7 +45,7 @@ double AdTempCalc_6_8(double x)
 
   return result;
 }
-#endif
+#endif  //__SDK_LITE_AD_TEMP_CALC_6_8__
 /*********************************************************************************/
 #ifdef __SDK_LITE_AD_TEMP_CALC_10__
 double AdTempCalc_10(double x)
@@ -80,7 +80,7 @@ double AdTempCalc_10(double x)
 
   return result;
 }
-#endif
+#endif  //__SDK_LITE_AD_TEMP_CALC_10__
 /*********************************************************************************/
 #ifdef __SDK_LITE_AD_TEMP_CALC_27__
 double AdTempCalc_27(double x)
@@ -115,7 +115,7 @@ double AdTempCalc_27(double x)
 
   return result;
 }
-#endif
+#endif  //__SDK_LITE_AD_TEMP_CALC_27__
 /*********************************************************************************/
 #ifdef __SDK_LITE_AD_TEMP_CALC_4_7__
 double AdTempCalc_4_7(double x)
@@ -155,7 +155,7 @@ double AdTempCalc_4_7(double x)
 
   return result;
 }
-#endif
+#endif  //__SDK_LITE_AD_TEMP_CALC_4_7__
 /*********************************************************************************/
 #ifdef __SDK_LITE_AD_TEMP_CALC_20K_TYPEA__
 double AdTempCalc_20k_TypeA(double x)
@@ -200,7 +200,7 @@ double AdTempCalc_20k_TypeA(double x)
 
   return result;
 }
-#endif
+#endif  //__SDK_LITE_AD_TEMP_CALC_20K_TYPEA__
 /*********************************************************************************/
 #ifdef __SDK_LITE_AD_TEMP_CALC_20K_TYPEB__
 double AdTempCalc_20k_TypeB(double x)
@@ -244,7 +244,7 @@ double AdTempCalc_20k_TypeB(double x)
 
   return result;
 }
-#endif
+#endif  //__SDK_LITE_AD_TEMP_CALC_20K_TYPEB__
 /*********************************************************************************/
 #ifdef __SDK_LITE_CALC_CTRL_STEP__
 tU8 CalcCtrlStep(tS16 Data, tS16 Set, tS16 SetPlusDev, tU8 CurStep)
@@ -296,7 +296,7 @@ tU8 CalcCtrlStep(tS16 Data, tS16 Set, tS16 SetPlusDev, tU8 CurStep)
 
   return CurStep;
 }
-#endif
+#endif  //__SDK_LITE_CALC_CTRL_STEP__
 /*********************************************************************************/
 #ifdef __SDK_LITE_CALC_PERCENTAGE__
 float CalcPercentage(tS16 Data, tS16 Min, tS16 Max, tU16 Resolution)
@@ -329,7 +329,7 @@ float CalcPercentage(tS16 Data, tS16 Min, tS16 Max, tU16 Resolution)
 
   return Result;
 }
-#endif
+#endif  //__SDK_LITE_CALC_PERCENTAGE__
 /*********************************************************************************/
 #ifdef __SDK_LITE_RECORD_INTPUT__
 float RecordInput(tU16 Adc, tS32 Min, tS32 Max, tU16 AdcMin, tU16 AdcMax)
@@ -355,7 +355,7 @@ float RecordInput(tU16 Adc, tS32 Min, tS32 Max, tU16 AdcMin, tU16 AdcMax)
 
   return Result;
 }
-#endif
+#endif  //__SDK_LITE_RECORD_INTPUT__
 /*********************************************************************************/
 #ifdef __SDK_LITE_GET_SAMPLING__
 tS16 GetSampling(tS16 Dat, tag_SamplingVar *Smp)
@@ -385,7 +385,7 @@ tS16 GetSampling(tS16 Dat, tag_SamplingVar *Smp)
 
   return Result;
 }
-#endif
+#endif  //__SDK_LITE_GET_SAMPLING__
 /*********************************************************************************/
 #ifdef __SDK_LITE_COMP_EACH_CONTROL__
 void CompEachControl(tag_CompEachControl *Comp, tU8 Run)
@@ -444,7 +444,7 @@ void CompEachControl(tag_CompEachControl *Comp, tU8 Run)
   if(Comp->DelayCnt) Comp->DelayCnt--;
   if(Comp->RestartDelayCnt) Comp->RestartDelayCnt--;
 }
-#endif
+#endif  //__SDK_LITE_COMP_EACH_CONTROL__
 /*********************************************************************************/
 #ifdef __SDK_LITE_CHECK_INPUT_EVENT__
 tU8  CheckInputEvent(tU16 Delay, tag_InputEvent *Input, tU8 Condition, tU8 PreCondition)
@@ -462,14 +462,14 @@ tU8  CheckInputEvent(tU16 Delay, tag_InputEvent *Input, tU8 Condition, tU8 PreCo
   }
   return Input->Result;
 }
-#endif
+#endif  //__SDK_LITE_CHECK_INPUT_EVENT__
 /*********************************************************************************/
 #ifdef __SDK_LITE_TEMP_C_TO_F__
 float  CnvTempC_To_F(float Temp)
 {
   return Temp * (float) 1.8 + 32;
 }
-#endif
+#endif  //__SDK_LITE_TEMP_C_TO_F__
 /*********************************************************************************/
 #ifdef __SDK_LITE_CALC_TIME_DATE_FUNC__
 tU16 DaysForMonth[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -548,7 +548,7 @@ tS32 GetDiffDaysEarlierToAfterDate(tag_SysSdkDate *Earlier, tag_SysSdkDate *Afte
 {
   return CnvDateToDay(After) - CnvDateToDay(Earlier);
 }
-#endif
+#endif  //__SDK_LITE_CALC_TIME_DATE_FUNC__
 /*********************************************************************************/
 #ifdef __SDK_LITE_CHECK_SCHDULE_TIME_STOP__
 tU8 CheckScheduleTimeStop(tag_CheckScheduleTime *Sch, tU8 Run, tU8 CurHour, tU8 CurMin)
@@ -580,7 +580,7 @@ tU8 CheckScheduleTimeStop(tag_CheckScheduleTime *Sch, tU8 Run, tU8 CurHour, tU8 
 
   return false;
 }
-#endif
+#endif  //__SDK_LITE_CHECK_SCHDULE_TIME_STOP__
 /*********************************************************************************/
 #ifdef __SDK_LITE_SET_RUNNING_TIME__
 tU8 SetRunningTime(tU8 Condition, tU16  *RunTime,  tag_RuntimeVal *Data)
@@ -612,10 +612,9 @@ tU8 SetRunningTime(tU8 Condition, tU16  *RunTime,  tag_RuntimeVal *Data)
 
   return false;
 }
-#endif
+#endif  //__SDK_LITE_SET_RUNNING_TIME__
 /*********************************************************************************/
 #ifdef __SDK_BCD_CONVERSION__
-
 tU8 Bcd2Binary(tU8 Bcd)
 {
   tU8 Bin = 0;
@@ -636,6 +635,19 @@ tU8 Binary2Bcd(tU8 Bin)
 
   return Bcd;
 }
-
-#endif
+#endif  //__SDK_BCD_CONVERSION__
+/*********************************************************************************/
+#ifdef __SDK_CALC_CHECKSUM_8BIT__
+tU8 CalcCheckSum_8Bit(tU8 *buf, tU8 len)
+{
+  tU8 i, res = 0;
+  
+  for(i = 0; i < len; i++)
+  {
+    res += buf[i];
+  }
+  
+  return 0x100 - res;
+}
+#endif  //__SDK_CALC_CHECKSUM_8BIT__
 /*********************************************************************************/
