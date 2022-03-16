@@ -5,16 +5,19 @@
 */
 /*********************************************************************************/
 #ifndef __SYS_SDK_LITE_H__
-#define  __SYS_SDK_LITE_H__
+#define __SYS_SDK_LITE_H__
 /*********************************************************************************/
 #include <stdlib.h>
 #include "SysTypedef.h"
 #include "SysSdkLiteConfig.h"
 /*********************************************************************************/
-#define SYS_SDK_LITE_REVISION_DATE    20211217
+#define SYS_SDK_LITE_REVISION_DATE    20220316
 /*********************************************************************************/
 /** REVISION HISTORY **/
 /*
+  2022. 03. 16.          - GetDewpointTemperature() 추가.
+  Jeong Hyun Gu
+
   2021. 12. 17.          - __BV(), CalcCheckSum_8Bit() 함수 추가.
   Jeong Hyun Gu          - CalcCtrlStep(), CalcPercentage() 변수타입 변경.
 
@@ -88,7 +91,7 @@
 */
 #ifdef __SDK_LITE_AD_TEMP_CALC_6_8__
 double AdTempCalc_6_8(double x);
-#endif
+#endif //__SDK_LITE_AD_TEMP_CALC_6_8__
 /*********************************************************************************/
 /*
   @brief
@@ -99,7 +102,7 @@ double AdTempCalc_6_8(double x);
 */
 #ifdef __SDK_LITE_AD_TEMP_CALC_10__
 double AdTempCalc_10(double x);
-#endif
+#endif //__SDK_LITE_AD_TEMP_CALC_10__
 /*********************************************************************************/
 /*
   @brief
@@ -110,7 +113,7 @@ double AdTempCalc_10(double x);
 */
 #ifdef __SDK_LITE_AD_TEMP_CALC_27__
 double AdTempCalc_27(double x);
-#endif
+#endif //__SDK_LITE_AD_TEMP_CALC_27__
 /*********************************************************************************/
 /*
   @brief
@@ -121,7 +124,7 @@ double AdTempCalc_27(double x);
 */
 #ifdef __SDK_LITE_AD_TEMP_CALC_4_7__
 double AdTempCalc_4_7(double x);
-#endif
+#endif //__SDK_LITE_AD_TEMP_CALC_4_7__
 /*********************************************************************************/
 /*
   @brief
@@ -132,7 +135,7 @@ double AdTempCalc_4_7(double x);
 */
 #ifdef __SDK_LITE_AD_TEMP_CALC_20K_TYPEA__
 double AdTempCalc_20k_TypeA(double x);
-#endif
+#endif //__SDK_LITE_AD_TEMP_CALC_20K_TYPEA__
 /*********************************************************************************/
 /*
   @brief
@@ -143,7 +146,7 @@ double AdTempCalc_20k_TypeA(double x);
 */
 #ifdef __SDK_LITE_AD_TEMP_CALC_20K_TYPEB__
 double AdTempCalc_20k_TypeB(double x);
-#endif
+#endif //__SDK_LITE_AD_TEMP_CALC_20K_TYPEB__
 /*********************************************************************************/
 /*
   @brief
@@ -155,7 +158,7 @@ double AdTempCalc_20k_TypeB(double x);
 */
 #ifdef  __SDK_LITE_CALC_CTRL_STEP__
 tU8 CalcCtrlStep(tS32 Data, tS32 Set, tS32 SetPlusDev, tU8 CurStep);
-#endif
+#endif //__SDK_LITE_CALC_CTRL_STEP__
 /*********************************************************************************/
 /*
   @brief
@@ -167,7 +170,7 @@ tU8 CalcCtrlStep(tS32 Data, tS32 Set, tS32 SetPlusDev, tU8 CurStep);
 */
 #ifdef  __SDK_LITE_CALC_PERCENTAGE__
 float CalcPercentage(tS32 Data, tS32 Min, tS32 Max, tU16 Resolution);
-#endif
+#endif //__SDK_LITE_CALC_PERCENTAGE__
 /*********************************************************************************/
 /*
   @brief
@@ -189,7 +192,7 @@ float CalcPercentage(tS32 Data, tS32 Min, tS32 Max, tU16 Resolution);
 */
 #ifdef __SDK_LITE_RECORD_INTPUT__
 float RecordInput(tU16 Adc, tS32 Min, tS32 Max, tU16 AdcMin, tU16 AdcMax);
-#endif
+#endif //__SDK_LITE_RECORD_INTPUT__
 /*********************************************************************************/
 /*
   @brief
@@ -214,7 +217,7 @@ typedef  struct
   tS16 Buf[GET_SAMPLING_LEV];
 }tag_SamplingVar;
 tS16 GetSampling(tS16 Dat, tag_SamplingVar *Smp);
-#endif
+#endif //__SDK_LITE_GET_SAMPLING__
 /*********************************************************************************/
 /*
   @brief
@@ -289,7 +292,7 @@ typedef struct
   tU16 RestartDelayCnt;
 }tag_CompEachControl;
 void CompEachControl(tag_CompEachControl *Comp, tU8 Run);
-#endif
+#endif //__SDK_LITE_COMP_EACH_CONTROL__
 /*********************************************************************************/
 /*
   @brief
@@ -312,7 +315,7 @@ typedef  struct
   tU16  Cnt;
 }tag_InputEvent;
 tU8  CheckInputEvent(tU16 Delay, tag_InputEvent *Input, tU8 Condition, tU8 PreCondition);
-#endif
+#endif //__SDK_LITE_CHECK_INPUT_EVENT__
 /*********************************************************************************/
 /*
   @brief
@@ -324,7 +327,7 @@ tU8  CheckInputEvent(tU16 Delay, tag_InputEvent *Input, tU8 Condition, tU8 PreCo
 */
 #ifdef __SDK_LITE_TEMP_C_TO_F__
 float  CnvTempC_To_F(float Temp);
-#endif
+#endif //__SDK_LITE_TEMP_C_TO_F__
 /*********************************************************************************/
 /*
   @brief::GetDateAfterDay()
@@ -358,7 +361,7 @@ typedef struct
 }tag_SysSdkDate;
 void GetDateAfterDay(tag_SysSdkDate *Date, tU16 AddDay);
 tS32 GetDiffDaysEarlierToAfterDate(tag_SysSdkDate *Earlier, tag_SysSdkDate *After);
-#endif
+#endif //__SDK_LITE_CALC_TIME_DATE_FUNC__
 /*********************************************************************************/
 #ifdef __SDK_LITE_CHECK_SCHDULE_TIME_STOP__
 /*
@@ -392,7 +395,7 @@ typedef struct
   tU16 End;
 }tag_CheckScheduleTime;
 tU8 CheckScheduleTimeStop(tag_CheckScheduleTime *Sch, tU8 Run, tU8 CurHour, tU8 CurMin);
-#endif
+#endif //__SDK_LITE_CHECK_SCHDULE_TIME_STOP__
 /*********************************************************************************/
 #ifdef __SDK_LITE_SET_RUNNING_TIME__
 /*
@@ -412,7 +415,7 @@ typedef struct
   tU16 Temp;
 }tag_RuntimeVal;
 tU8 SetRunningTime(tU8 Condition, tU16  *RunTime,  tag_RuntimeVal *Data);
-#endif
+#endif //__SDK_LITE_SET_RUNNING_TIME__
 /*********************************************************************************/
 #ifdef __SDK_BCD_CONVERSION__
 /*
@@ -423,7 +426,7 @@ tU8 SetRunningTime(tU8 Condition, tU16  *RunTime,  tag_RuntimeVal *Data);
 */
 tU8 Bcd2Binary(tU8 Bcd);
 tU8 Binary2Bcd(tU8 Bin);
-#endif
+#endif //__SDK_BCD_CONVERSION__
 /*********************************************************************************/
 #ifdef __SDK_CALC_CHECKSUM_8BIT__
 /*
@@ -433,6 +436,16 @@ tU8 Binary2Bcd(tU8 Bin);
   @example
 */
 tU8 CalcCheckSum_8Bit(tU8 *buf, tU8 len);
-#endif
+#endif //__SDK_CALC_CHECKSUM_8BIT__
+/*********************************************************************************/
+#ifdef __SDK_GET_DEWPOINT_TEMPERATURE__
+/*
+  @brief
+  Dewpoint 온도 계산 함수.
+
+  @example
+*/
+float GetDewpointTemperature(float Temperature, float RelativeHumidity);
+#endif  //__SDK_GET_DEWPOINT_TEMPERATURE__
 /*********************************************************************************/
 #endif //__SYS_SDK_LITE_H__
